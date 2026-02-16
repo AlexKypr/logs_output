@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-logs-app
+  labels:
+    app: k8s-logs-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-logs-app
+  template:
+    metadata:
+      labels:
+        app: k8s-logs-app
+    spec:
+      containers:
+      - name: k8s-logs-app
+        image: logs-output:release
+        imagePullPolicy: IfNotPresent
+        # This binary writes to stdout periodically; no ports exposed
+        resources: {}
